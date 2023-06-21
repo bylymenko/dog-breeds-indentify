@@ -23,7 +23,7 @@ def load_image():
         return None
 
 def print_predictions(preds):
-    classes = decode_predictions(preds, top=3)[0]
+    classes = decode_predictions(preds, top=3)
     for cl in classes:
         st.write(cl[1], cl[2])
 
@@ -36,6 +36,8 @@ if result:
     x = preprocess_image(img)
     preds = model.predict(x)
     st.write('**Результати розпізнавання:**')
-    #print_predictions(preds)
-    st.write(type(preds))
+    print_predictions(preds)
+    #st.write(type(preds))
     st.write(preds)
+
+

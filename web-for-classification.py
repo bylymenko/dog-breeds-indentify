@@ -33,7 +33,10 @@ def print_predictions(preds):
     st.write(preds2)
     preds2.sort()
     st.write(preds2)
-    lst = list(reversed([list(preds).index(i) for i in list(preds2)]))
+    lpreds2 = list(preds2)
+    lpreds = list(preds)
+    lst = [lpreds.index(i) for i in lpreds2]
+    print(lst)
     res = np.array(lst,dtype='int8')
     st.write(res)
 

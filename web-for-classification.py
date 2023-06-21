@@ -23,9 +23,12 @@ def load_image():
         return None
 
 def print_predictions(preds):
-    classes = decode_predictions(preds, top=3)
-    for cl in classes:
-        st.write(cl[1], cl[2])
+    # classes = decode_predictions(preds, top=3)
+    l1 = list(range(len(preds)))
+    lst = [(x,l1.index(x)) for x in sorted(preds)]
+    st.write(lst)
+    # for cl in classes:
+    #     st.write(cl[1], cl[2])
 
 model = load_model("dog_breeds.h5")
 

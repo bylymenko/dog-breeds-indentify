@@ -36,11 +36,11 @@ def print_predictions(preds):
     st.write(preds2)
     # lst = [lpreds.find(i) for i in lpreds2]
     idx = 0
-    st.write(preds2[0][1])
-    # while not (preds2[0] == preds[idx]):
+    # st.write(preds2[0][0])
+    # while not (preds2[0][0] == preds[0][idx]):
     #     idx =+ 1
-    # res = np.where(preds == preds2[0])[0]
-    st.write(idx)    
+    res = np.where(preds[0] == preds2[0][0])[0][0]
+    st.write(res)    
     # lst = np.array([ np.where(preds == i)[0][0] for i in preds2 ],dtype = 'int8')
     # st.write(lst)
 

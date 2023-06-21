@@ -23,26 +23,14 @@ def load_image():
         return None
 
 def print_predictions(preds):
-    # classes = decode_predictions(preds, top=3)
-    # st.write(preds.sort())
-    # lst = [lpreds.index(x) for x in sorted(lpreds)]
-    # st.write(lst
-    # for cl in classes:
-    #     st.write(cl[1], cl[2])
     preds2 = preds.copy()
     st.write(preds2)
     preds2.sort()
     preds2 = np.flip(preds2)
-    st.write(preds2)
-    # lst = [lpreds.find(i) for i in lpreds2]
-    idx = 0
-    # st.write(preds2[0][0])
-    # while not (preds2[0][0] == preds[0][idx]):
-    #     idx =+ 1
+    # st.write(preds2)
     res = np.where(preds[0] == preds2[0][0])[0][0]
-    st.write(res)    
-    # lst = np.array([ np.where(preds == i)[0][0] for i in preds2 ],dtype = 'int8')
-    # st.write(lst)
+    st.write('Належить до класу: ' + str(res))    
+    return res
 
 model = load_model("dog_breeds.h5")
 

@@ -35,7 +35,8 @@ def print_predictions(preds):
     st.write(preds2)
     lpreds2 = list(preds2)
     lpreds = list(preds)
-    lst = [lpreds.find(i) for i in lpreds2]
+    # lst = [lpreds.find(i) for i in lpreds2]
+    lst = [i for i in lpreds2]
     print(lst)
     res = np.array(lst,dtype='int8')
     st.write(res)

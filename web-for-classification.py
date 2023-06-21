@@ -31,7 +31,8 @@ def print_predictions(preds):
     #     st.write(cl[1], cl[2])
     preds2 = preds.copy()
     st.write(preds2)
-    preds2 = np.flip(preds2.sort())
+    preds2.sort()
+    preds2 = np.flip(preds2)
     st.write(preds2)
     # lst = [lpreds.find(i) for i in lpreds2]
     for i in preds2:

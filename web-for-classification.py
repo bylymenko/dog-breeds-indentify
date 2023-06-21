@@ -34,8 +34,10 @@ def print_predictions(preds):
     preds2.sort()
     st.write(preds2)
     # lst = [lpreds.find(i) for i in lpreds2]
-    lst = np.array([ np.where(preds == i)[0][0] for i in preds2 ],dtype = 'int8')
-    st.write(lst)
+    for i in preds2:
+        st.write(np.where(preds == i)[0][0])    
+    # lst = np.array([ np.where(preds == i)[0][0] for i in preds2 ],dtype = 'int8')
+    # st.write(lst)
 
 model = load_model("dog_breeds.h5")
 

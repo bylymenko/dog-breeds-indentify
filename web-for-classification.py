@@ -32,7 +32,7 @@ def print_predictions(preds):
     preds2 = preds.copy()
     preds2.sort()
     lst = list(reversed([list(preds).index(i) for i in preds2]))
-    res = numpy.array(lst,dtype='int8')
+    res = np.array(lst,dtype='int8')
     st.write(res)
 
 model = load_model("dog_breeds.h5")

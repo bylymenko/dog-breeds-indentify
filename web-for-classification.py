@@ -30,8 +30,10 @@ def print_predictions(preds):
     # for cl in classes:
     #     st.write(cl[1], cl[2])
     preds2 = preds.copy()
+    st.write(preds2)
     preds2.sort()
-    lst = list(reversed([list(preds).index(i) for i in preds2]))
+    st.write(preds2)
+    lst = list(reversed([list(preds).index(i) for i in list(preds2)]))
     res = np.array(lst,dtype='int8')
     st.write(res)
 

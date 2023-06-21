@@ -35,8 +35,8 @@ def print_predictions(preds):
     preds2 = np.flip(preds2)
     st.write(preds2)
     # lst = [lpreds.find(i) for i in lpreds2]
-    for i in preds2:
-        st.write(i)    
+    res = np.where(preds == preds2[0])[0][0]
+    st.write(res)    
     # lst = np.array([ np.where(preds == i)[0][0] for i in preds2 ],dtype = 'int8')
     # st.write(lst)
 

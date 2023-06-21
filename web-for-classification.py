@@ -34,7 +34,7 @@ def print_predictions(preds):
     preds2.sort()
     st.write(preds2)
     # lst = [lpreds.find(i) for i in lpreds2]
-    for i in preds2:
+    for i in preds2.reverse():
         st.write(i)    
     # lst = np.array([ np.where(preds == i)[0][0] for i in preds2 ],dtype = 'int8')
     # st.write(lst)

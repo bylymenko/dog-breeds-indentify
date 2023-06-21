@@ -24,7 +24,7 @@ def load_image():
 
 def print_predictions(preds):
     # classes = decode_predictions(preds, top=3)
-    st.write(lpreds.sort())
+    st.write(preds.sort())
     # lst = [lpreds.index(x) for x in sorted(lpreds)]
     # st.write(lst)
     # for cl in classes:

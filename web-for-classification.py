@@ -32,8 +32,8 @@ def print_predictions(preds):
     res = np.where(preds[0] == preds2[0][0])[0][0]
     st.write('Належить до породи: ' + str(res))    
     return res
+    print(my_dict)
 
-print(my_dict)
 
 model = load_model("dog_breeds.h5")
 
@@ -45,7 +45,7 @@ if result:
     preds = model.predict(x)
     st.write('**Результати розпізнавання:**')
     st.write(preds)
-    st.write(type(preds))
+    #st.write(type(preds))
     print_predictions(preds)
 
 

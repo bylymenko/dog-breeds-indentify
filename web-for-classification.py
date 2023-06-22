@@ -54,7 +54,8 @@ def print_predictions(preds):
     preds2 = np.flip(preds2)
     # st.write(preds2)
     res = np.where(preds[0] == preds2[0][0])[0][0]
-    st.write('Належить до породи: ' + str(res))    
+    #st.write('Належить до породи: ' + str(res))
+    st.write('Належить до породи: ' + dog_breeds[res+1])    
     return res
     
 

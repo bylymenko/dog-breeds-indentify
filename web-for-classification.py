@@ -58,7 +58,32 @@ def load_image():
     #st.write('Належить до породи: ' + dog_breeds[res])    
     #return res
 
-#
+def get_image_url_by_breed(breed):
+    breed = breed.lower()
+    # Словник з URL зображень для кожної породи
+    image_urls = {
+        'Бігль': 'https://upload.wikimedia.org/wikipedia/commons/b/b6/Shemsu_Sotis_Perun.jpg',
+        'Бульдог': 'https://petsi.net/images/dogbreed/french-bulldog.jpg',
+        'Чихуахуа': 'https://sobakovod.club/uploads/posts/2021-12/1640347969_1-sobakovod-club-p-sobaki-chistokrovnoi-chikhuakhua-1.jpg',
+        'Чау-чау': 'https://images.prom.ua/1029598115_w$%7Bwidth%7D_h$%7Bheight%7D_chau-chau.jpg',
+        'Коргі': 'https://sobaky.info/wp-content/uploads/2018/02/1-4.jpg',
+        'Такса': 'https://malinois.com.ua/wp-content/uploads/2022/10/295249245_8470984569594272_6495582147680100542_n.jpg',
+        'Далматин': 'https://petsi.net/images/dogbreed/13.jpg',
+        'Доберман': 'https://static.tildacdn.com/tild3537-3736-4035-b233-323161306165/reddit__the_front_pa.jpg',
+        'Англійський сетер': 'https://sobakovod.club/uploads/posts/2021-12/1639910757_1-sobakovod-club-p-sobaki-angliiskii-setter-sobaka-1.jpg',
+        'Німецька вівчарка': 'https://petadvice.co.ua/wp-content/uploads/2020/02/german-sherpherd2-813x1024.jpg',
+        'Хаскі': 'https://petdiets.ru/image/data/haski-statya.jpeg',
+        'Джек Расел': 'https://zooposhuk.com.ua/wp-content/uploads/2021/11/jack_russel.jpg'
+        #'Лабрадор': '',
+        #'Мальтіпу': '',
+        #'Пекінес': '',
+        #'Пудель': '',
+        #'Мопс': '',
+        #'Ротвейлер': '',
+        #'Сенбернар': '',
+        #'Віппет': '',
+        #'Йоркширський терєр': '',
+    }
 
 def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
@@ -69,6 +94,7 @@ def print_predictions(preds, top_k=3):
         breed = dog_breeds[index]
         probability = preds2[index]
         st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
+        st.image(image_url)
     return top_indexes
     
 

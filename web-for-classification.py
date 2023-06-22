@@ -83,7 +83,7 @@ result = st.button('Розпізнати зображення')
 if result:
     x = preprocess_image(img)
     preds = model.predict(x)
-    st.write('**Результати розпізнавання:**')
+    st.write('**Результати розпізнавання**')
     #st.write(preds)
     #st.write(type(preds))
     print_predictions(preds)

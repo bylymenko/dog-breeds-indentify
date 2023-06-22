@@ -74,16 +74,7 @@ def get_image_url_by_breed(breed):
         'Німецька вівчарка': 'https://petadvice.co.ua/wp-content/uploads/2020/02/german-sherpherd2-813x1024.jpg',
         'Хаскі': 'https://petdiets.ru/image/data/haski-statya.jpeg',
         'Джек Расел': 'https://zooposhuk.com.ua/wp-content/uploads/2021/11/jack_russel.jpg'
-        #'Лабрадор': '',
-        #'Мальтіпу': '',
-        #'Пекінес': '',
-        #'Пудель': '',
-        #'Мопс': '',
-        #'Ротвейлер': '',
-        #'Сенбернар': '',
-        #'Віппет': '',
-        #'Йоркширський терєр': '',
-    {
+    }
 
 
 def print_predictions(preds, top_k=3):

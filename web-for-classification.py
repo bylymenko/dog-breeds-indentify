@@ -6,6 +6,30 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
 import numpy as np
 
+#словник
+dog_breeds = {
+    0: 'Бігль',
+    1: 'Бульдог',
+    2: 'Чихуахуа',
+    3: 'Чау-чау',
+    4: 'Коргі',
+    5: 'Такса',
+    6: 'Далматин',
+    7: 'Доберман',
+    8: 'Англійський сетер',
+    9: 'Німецька вівчарка',
+    10: 'Хаскі',
+    11: 'Джек Расел',
+    12: 'Лабрадор',
+    13: 'Мальтіпу',
+    14: 'Пекінес',
+    15: 'Пудель',
+    16: 'Мопс',
+    17: 'Ротвейлер',
+    18: 'Сенбернар',
+    19: 'Віппет',
+    20: 'Йоркширський терєр'
+}
 
 def preprocess_image(img):
     img = img.resize((100, 100))

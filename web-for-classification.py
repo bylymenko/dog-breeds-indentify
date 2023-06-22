@@ -5,6 +5,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
 import numpy as np
+from my_dict import my_dict
 
 def preprocess_image(img):
     img = img.resize((100, 100))
@@ -29,7 +30,7 @@ def print_predictions(preds):
     preds2 = np.flip(preds2)
     # st.write(preds2)
     res = np.where(preds[0] == preds2[0][0])[0][0]
-    st.write('Належить до класу: ' + str(res))    
+    st.write('Належить до породи: ' + str(res))    
     return res
 
 model = load_model("dog_breeds.h5")

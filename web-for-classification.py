@@ -93,9 +93,10 @@ def print_predictions(preds, top_k=3):
     for i, index in enumerate(top_indexes):
         breed = dog_breeds[index]
         probability = preds2[index]
+        image_url = get_image_url_by_breed(breed)
         st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
         st.image(image_url)
-    return top_indexes
+    #return top_indexes
     
 
 model = load_model("dog_breeds.h5")

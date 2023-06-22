@@ -118,7 +118,7 @@ if result:
     top_breed_index = top_indexes[0]
     top_breed = dog_breeds[top_breed_index]
     breed_image_path = get_image_url_by_breed(top_breed)
-    breed_image = Image.open(breed_image_path).convert('RGB')
+    breed_image = Image.open(breed_image_path)
     st.image(breed_image, caption=top_breed, width=200)
 
     print_predictions(preds)

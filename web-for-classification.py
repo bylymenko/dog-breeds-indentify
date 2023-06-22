@@ -92,34 +92,34 @@ def load_image():
 #    #st.write(type(preds))
 #    print_predictions(preds)
 
-def get_predictions(preds, top_k=3):
-    preds2 = np.squeeze(preds)
+def get_image_url_by_breed(breed):
+    # Замініть цей рядок на шлях до вашої локальної бази даних зображень
+    images_folder = 'C:/Users/user/Desktop/dog-breeds-indentify/breeds'
+
+    breed_image_path = f'{images_folder}/{breed}.jpg'
+    return breed_image_path
+
+def print_predictions(preds, top_k=3):
+    preds2 = preds.copy()
+    preds2 = np.squeeze(preds2)
     top_indexes = np.argsort(preds2)[::-1][:top_k]
-    predictions = []
-    for index in top_indexes:
+    st.write('**Топ-{} породи собак:**'.format(top_k))
+    for i, index in enumerate(top_indexes):
         breed = dog_breeds[index]
         probability = preds2[index]
-        predictions.append((breed, probability))
-    return predictions
+        st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
+        breed_image_path = get_image_url_by_breed(breed)
+        breed_image = Image.open(breed_image_path).convert('RGB')
+        st.image(breed_image, caption=breed, width=200)
 
-def load_model_and_predict(image):
-    model = load_model("dog_breeds.h5")
-    x = preprocess_image(image)
-    preds = model.predict(x)
-    predictions = get_predictions(preds)
-    return predictions
+model = load_model("dog_breeds.h5")
 
 st.title('Класифікація зображень')
 img = load_image()
 result = st.button('Розпізнати зображення')
+
 if result:
-    if img is not None:
-        predictions = load_model_and_predict(img)
-        st.write('**Результати розпізнавання:**')
-        for breed, probability in predictions:
-            st.write(f'{breed} (Ймовірність: {probability:.2%})')
-            image_path = f'C:/Users/user/Desktop/dog-breeds-indentify/breeds/{breed}.jpg'  # Шлях до зображень порід собак
-            breed_image = Image.open(image_path).convert('RGB')
-            st.image(breed_image, caption=breed, use_column_width=True)
-    else:
-        st.write('Будь ласка, оберіть зображення для розпізнавання.')
+    x = preprocess_image(img)
+    preds = model.predict(x)
+    st.write('**Результати розпізнавання:**')
+    print_predictions(preds)

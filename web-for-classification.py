@@ -47,16 +47,27 @@ def load_image():
     else:
         return None
 
-def print_predictions(preds):
+#def print_predictions(preds, top_k=3):
+    #preds2 = preds.copy()
+    #st.write(preds2)
+    #preds2.sort()
+    #preds2 = np.flip(preds2)
+    ## st.write(preds2)
+    #res = np.where(preds[0] == preds2[0][0])[0][0]
+    ##st.write('Належить до породи: ' + str(res))
+    #st.write('Належить до породи: ' + dog_breeds[res])    
+    #return res
+
+def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
-    st.write(preds2)
-    preds2.sort()
-    preds2 = np.flip(preds2)
-    # st.write(preds2)
-    res = np.where(preds[0] == preds2[0][0])[0][0]
-    #st.write('Належить до породи: ' + str(res))
-    st.write('Належить до породи: ' + dog_breeds[res])    
-    return res
+    preds2 = np.squeeze(preds2)
+    top_indexes = np.argsort(preds2)[::-1][:top_k]
+    st.write('**Топ-{} порід собак:**'.format(top_k))
+    for i, index in enumerate(top_indexes):
+        breed = dog_breeds[index + 1]
+        probability = preds2[index]
+        st.write('{}. {} (Ймовірність: {:.2%})'.format(i+1, breed, probability))
+    return top_indexes
     
 
 

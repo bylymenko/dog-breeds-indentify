@@ -62,14 +62,13 @@ def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
     preds2 = np.squeeze(preds2)
     top_indexes = np.argsort(preds2)[::-1][:top_k]
-    st.write('**Топ-{} порід собак:**'.format(top_k))
+    st.write('**Топ-{} поріди собак:**'.format(top_k))
     for i, index in enumerate(top_indexes):
         breed = dog_breeds[index]
         probability = preds2[index]
         st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
     return top_indexes
     
-
 
 model = load_model("dog_breeds.h5")
 
@@ -79,7 +78,7 @@ result = st.button('Розпізнати зображення')
 if result:
     x = preprocess_image(img)
     preds = model.predict(x)
-    #st.write('**Результати розпізнавання:**')
+    st.write('**Результати розпізнавання:**')
     #st.write(preds)
     #st.write(type(preds))
     print_predictions(preds)

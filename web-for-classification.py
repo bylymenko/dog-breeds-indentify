@@ -83,7 +83,8 @@ def get_image_url_by_breed(breed):
         #'Сенбернар': '',
         #'Віппет': '',
         #'Йоркширський терєр': '',
-    }
+    {
+
 
 def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
@@ -93,9 +94,9 @@ def print_predictions(preds, top_k=3):
     for i, index in enumerate(top_indexes):
         breed = dog_breeds[index]
         probability = preds2[index]
-        image_url = get_image_url_by_breed(breed)
+        image_urls = get_image_url_by_breed(breed)
         st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
-        st.image(image_url)
+        st.image(image_urls)
     #return top_indexes
     
 

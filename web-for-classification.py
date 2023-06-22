@@ -47,24 +47,7 @@ def load_image():
     else:
         return None
 
-#def print_predictions(preds):
-#    preds2 = preds.copy()
-#    st.write(preds2)
-#    preds2.sort()
-#    preds2 = np.flip(preds2)
-#    st.write(preds2)
-#    res = np.where(preds[0] == preds2[0][0])[0][0]
-#    st.write('Належить до породи: ' + str(res))
-#    #st.write('Належить до породи: ' + dog_breeds[res])    
-#    return res
-
-def get_image_url_by_breed(breed):
-    # Замініть цей рядок на шлях до вашої локальної бази даних зображень
-    images_folder = 'C:/Users/user/Desktop/dog-breeds-indentify/breeds'
-    breed_image_path = f'{images_folder}/{breed}.jpg'
-    return breed_image_path
-
-def print_predictions(preds, top_k=5):
+def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
     preds2 = np.squeeze(preds2)
     top_indexes = np.argsort(preds2)[::-1][:top_k]
@@ -87,4 +70,3 @@ if result:
     #st.write(preds)
     #st.write(type(preds))
     print_predictions(preds)
-

@@ -33,6 +33,8 @@ def print_predictions(preds):
     st.write('Належить до породи: ' + str(res))    
     return res
 
+print(my_dict)
+
 model = load_model("dog_breeds.h5")
 
 st.title('Класифікація зображень')

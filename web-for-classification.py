@@ -119,7 +119,7 @@ if result:
         for breed, probability in predictions:
             st.write(f'{breed} (Ймовірність: {probability:.2%})')
             image_path = f'C:/Users/user/Desktop/dog-breeds-indentify/breeds/{breed}.jpg'  # Шлях до зображень порід собак
-            breed_image = Image.open(image_path)
+            breed_image = Image.open(image_path).convert('RGB')
             st.image(breed_image, caption=breed, use_column_width=True)
     else:
         st.write('Будь ласка, оберіть зображення для розпізнавання.')

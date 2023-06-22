@@ -58,27 +58,67 @@ def load_image():
 #    #st.write('Належить до породи: ' + dog_breeds[res])    
 #    return res
 
-def print_predictions(preds, top_k=5):
+def get_image_url_by_breed(breed):
+    # Замініть цей рядок на шлях до вашої локальної бази даних зображень
+    images_folder = 'C:/Users/user/Desktop/dog-breeds-indentify/breeds'
+    breed_image_path = f'{images_folder}/{breed}.jpg'
+    return breed_image_path
+
+#def print_predictions(preds, top_k=5):
+#    preds2 = preds.copy()
+#    preds2 = np.squeeze(preds2)
+#    top_indexes = np.argsort(preds2)[::-1][:top_k]
+#    st.write('**Топ-{} породи собак:**'.format(top_k))
+#    for i, index in enumerate(top_indexes):
+#        breed = dog_breeds[index]
+#        probability = preds2[index]
+#        st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
+#    return top_indexes
+
+    
+#model = load_model("dog_breeds.h5")
+
+#st.title('Класифікація зображень')
+#img = load_image()
+#result = st.button('Розпізнати зображення')
+#if result:
+#    x = preprocess_image(img)
+#    preds = model.predict(x)
+#    st.write('**Результати розпізнавання:**')
+    #st.write(preds)
+    #st.write(type(preds))
+#    print_predictions(preds)
+
+
+
+def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
     preds2 = np.squeeze(preds2)
     top_indexes = np.argsort(preds2)[::-1][:top_k]
-    st.write('**Топ-{} породи собак:**'.format(top_k))
+    st.write('**Топ-{} порід собак:**'.format(top_k))
     for i, index in enumerate(top_indexes):
         breed = dog_breeds[index]
         probability = preds2[index]
         st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
-    return top_indexes
+        breed_image_path = get_image_url_by_breed(breed)
+        breed_image = Image.open(breed_image_path).convert('RGB')
+        st.image(breed_image, caption=breed, width=200)
 
-    
 model = load_model("dog_breeds.h5")
 
 st.title('Класифікація зображень')
 img = load_image()
 result = st.button('Розпізнати зображення')
+
 if result:
     x = preprocess_image(img)
     preds = model.predict(x)
     st.write('**Результати розпізнавання:**')
-    #st.write(preds)
-    #st.write(type(preds))
+    top_indexes = np.argsort(preds[0])[::-1][:1]
+    top_breed_index = top_indexes[0]
+    top_breed = dog_breeds[top_breed_index]
+    breed_image_path = get_image_url_by_breed(top_breed)
+    breed_image = Image.open(breed_image_path).convert('RGB')
+    st.image(breed_image, caption=top_breed, width=200)
+
     print_predictions(preds)

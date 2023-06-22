@@ -82,6 +82,6 @@ if result:
     #st.write('**Результати розпізнавання:**')
     #st.write(preds)
     #st.write(type(preds))
-    #print_predictions(preds)
+    print_predictions(preds)
 
 

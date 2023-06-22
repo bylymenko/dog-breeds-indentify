@@ -58,47 +58,6 @@ def load_image():
     #st.write('Належить до породи: ' + dog_breeds[res])    
     #return res
 
-
-#def load_image_by_breed(breed):
- #   images_folder = 'C:/Users/user/Desktop/dog-breeds-indentify/breeds'  # Замініть на шлях до вашої папки з зображеннями
-  #  image_filename = breed + '.jpg'  # Припустимо, що назва файлу зображення має формат "{назва породи}.jpg"
-    #image_path = os.path.join(images_folder, image_filename)
-    #return Image.open(image_path)
-    #image = load_image_by_breed(breed)  # Завантажуємо зображення породи собаки
-        #st.image(image, caption=breed, use_column_width=True)
-
-#def print_predictions(preds, top_k=3):
-#    preds2 = preds.copy()
-#    preds2 = np.squeeze(preds2)
-#    top_indexes = np.argsort(preds2)[::-1][:top_k]
-#    st.write('**Топ-{} породи собак:**'.format(top_k))
-#    for i, index in enumerate(top_indexes):
-#        breed = dog_breeds[index]
-#        probability = preds2[index]
-#        st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
-#    return top_indexes
-    
-
-#model = load_model("dog_breeds.h5")
-
-#st.title('Класифікація зображень')
-#img = load_image()
-#result = st.button('Розпізнати зображення')
-#if result:
-#    x = preprocess_image(img)
-#    preds = model.predict(x)
-#    st.write('**Результати розпізнавання:**')
-#    #st.write(preds)
-#    #st.write(type(preds))
-#    print_predictions(preds)
-
-def get_image_url_by_breed(breed):
-    # Замініть цей рядок на шлях до вашої локальної бази даних зображень
-    images_folder = 'C:/Users/user/Desktop/dog-breeds-indentify/breeds'
-
-    breed_image_path = f'{images_folder}/{breed}.jpg'
-    return breed_image_path
-
 def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
     preds2 = np.squeeze(preds2)
@@ -108,18 +67,18 @@ def print_predictions(preds, top_k=3):
         breed = dog_breeds[index]
         probability = preds2[index]
         st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
-        breed_image_path = get_image_url_by_breed(breed)
-        breed_image = Image.open(breed_image_path)
-        st.image(breed_image, caption=breed, width=200)
+    return top_indexes
+    
 
 model = load_model("dog_breeds.h5")
 
 st.title('Класифікація зображень')
 img = load_image()
 result = st.button('Розпізнати зображення')
-
 if result:
     x = preprocess_image(img)
     preds = model.predict(x)
     st.write('**Результати розпізнавання:**')
+    #st.write(preds)
+    #st.write(type(preds))
     print_predictions(preds)

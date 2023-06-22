@@ -67,27 +67,59 @@ def load_image():
     #image = load_image_by_breed(breed)  # Завантажуємо зображення породи собаки
         #st.image(image, caption=breed, use_column_width=True)
 
-def print_predictions(preds, top_k=3):
-    preds2 = preds.copy()
-    preds2 = np.squeeze(preds2)
-    top_indexes = np.argsort(preds2)[::-1][:top_k]
-    st.write('**Топ-{} породи собак:**'.format(top_k))
-    for i, index in enumerate(top_indexes):
-        breed = dog_breeds[index]
-        probability = preds2[index]
-        st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
-    return top_indexes
+#def print_predictions(preds, top_k=3):
+#    preds2 = preds.copy()
+#    preds2 = np.squeeze(preds2)
+#    top_indexes = np.argsort(preds2)[::-1][:top_k]
+#    st.write('**Топ-{} породи собак:**'.format(top_k))
+#    for i, index in enumerate(top_indexes):
+#        breed = dog_breeds[index]
+#        probability = preds2[index]
+#        st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
+#    return top_indexes
     
 
-model = load_model("dog_breeds.h5")
+#model = load_model("dog_breeds.h5")
+
+#st.title('Класифікація зображень')
+#img = load_image()
+#result = st.button('Розпізнати зображення')
+#if result:
+#    x = preprocess_image(img)
+#    preds = model.predict(x)
+#    st.write('**Результати розпізнавання:**')
+#    #st.write(preds)
+#    #st.write(type(preds))
+#    print_predictions(preds)
+
+def get_predictions(preds, top_k=3):
+    preds2 = np.squeeze(preds)
+    top_indexes = np.argsort(preds2)[::-1][:top_k]
+    predictions = []
+    for index in top_indexes:
+        breed = dog_breeds[index]
+        probability = preds2[index]
+        predictions.append((breed, probability))
+    return predictions
+
+def load_model_and_predict(image):
+    model = load_model("dog_breeds.h5")
+    x = preprocess_image(image)
+    preds = model.predict(x)
+    predictions = get_predictions(preds)
+    return predictions
 
 st.title('Класифікація зображень')
 img = load_image()
 result = st.button('Розпізнати зображення')
 if result:
-    x = preprocess_image(img)
-    preds = model.predict(x)
-    st.write('**Результати розпізнавання:**')
-    #st.write(preds)
-    #st.write(type(preds))
-    print_predictions(preds)
+    if img is not None:
+        predictions = load_model_and_predict(img)
+        st.write('**Результати розпізнавання:**')
+        for breed, probability in predictions:
+            st.write(f'{breed} (Ймовірність: {probability:.2%})')
+            image_path = f'C:/Users/user/Desktop/dog-breeds-indentify/breeds/{breed}.jpg'  # Шлях до зображень порід собак
+            breed_image = Image.open(image_path)
+            st.image(breed_image, caption=breed, use_column_width=True)
+    else:
+        st.write('Будь ласка, оберіть зображення для розпізнавання.')

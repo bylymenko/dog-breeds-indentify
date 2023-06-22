@@ -58,10 +58,12 @@ def load_image():
     #st.write('Належить до породи: ' + dog_breeds[res])    
     #return res
 
+#
+
 def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
     preds2 = np.squeeze(preds2)
-    top_indexes = np.argsort(preds2)[::-1][:top_k]
+    top_indexes = np.argsort(preds2)[::0][:top_k]
     st.write('**Топ-{} породи собак:**'.format(top_k))
     for i, index in enumerate(top_indexes):
         breed = dog_breeds[index]

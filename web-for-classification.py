@@ -64,9 +64,9 @@ def print_predictions(preds, top_k=3):
     top_indexes = np.argsort(preds2)[::-1][:top_k]
     st.write('**Топ-{} порід собак:**'.format(top_k))
     for i, index in enumerate(top_indexes):
-        breed = dog_breeds[index + 1]
+        breed = dog_breeds[index]
         probability = preds2[index]
-        st.write('{}. {} (Ймовірність: {:.2%})'.format(i+1, breed, probability))
+        st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
     return top_indexes
     
 

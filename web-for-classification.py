@@ -6,7 +6,7 @@ from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.efficientnet import preprocess_input, decode_predictions
 import numpy as np
 
-#словник
+#Cловник
 dog_breeds = {
     0: 'Бігль',
     1: 'Бульдог',
@@ -64,6 +64,12 @@ def load_image():
    # image_path = os.path.join(images_folder, image_filename)
     #return image_path
 
+def load_image_by_breed(breed):
+    images_folder = 'C:/Users/user/Desktop/dog-breeds-indentify/breeds'  # Замініть на шлях до вашої папки з зображеннями
+    image_filename = breed + '.jpg'  # Припустимо, що назва файлу зображення має формат "{назва породи}.jpg"
+    image_path = os.path.join(images_folder, image_filename)
+    return Image.open(image_path)
+
 def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
     preds2 = np.squeeze(preds2)
@@ -73,6 +79,8 @@ def print_predictions(preds, top_k=3):
         breed = dog_breeds[index]
         probability = preds2[index]
         st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
+        image = load_image_by_breed(breed)  # Завантажуємо зображення породи собаки
+        st.image(image, caption=breed, use_column_width=True)
         #image_url = get_image_url_by_breed(breed)
         #st.image(image_url, use_column_width=True)
     return top_indexes

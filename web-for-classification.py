@@ -58,56 +58,55 @@ def load_image():
 #    #st.write('Належить до породи: ' + dog_breeds[res])    
 #    return res
 
-#def print_predictions(preds, top_k=3):
-#    preds2 = preds.copy()
-#    preds2 = np.squeeze(preds2)
-#    top_indexes = np.argsort(preds2)[::-1][:top_k]
-#    st.write('**Топ-{} породи собак:**'.format(top_k))
-#    for i, index in enumerate(top_indexes):
-#        breed = dog_breeds[index]
-#        probability = preds2[index]
-#        st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
-#    return top_indexes
-    
-
-#model = load_model("dog_breeds.h5")
-
-##st.title('Класифікація зображень')
-#img = load_image()
-#result = st.button('Розпізнати зображення')
-#if result:
-#    x = preprocess_image(img)
-#    preds = model.predict(x)
-#    st.write('**Результати розпізнавання:**')
-#    #st.write(preds)
-#    #st.write(type(preds))
-#    print_predictions(preds)
-
 def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
     preds2 = np.squeeze(preds2)
     top_indexes = np.argsort(preds2)[::-1][:top_k]
-    st.write('**Топ-{} поріди собак:**'.format(top_k))
+    st.write('**Топ-{} породи собак:**'.format(top_k))
     for i, index in enumerate(top_indexes):
         breed = dog_breeds[index]
         probability = preds2[index]
         st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
     return top_indexes
 
-def display_predicted_breed(image, breed):
-    st.write('**Порода собаки з найбільшою ймовірністю:**')
-    st.image(image, caption=breed, use_column_width=True)
+#def display_predicted_breed(image, breed):
+#    st.write('**Порода собаки з найбільшою ймовірністю:**')
+#    st.image(image, caption=breed, use_column_width=True)
+import sqlite3
 
+def display_predicted_breed_image(breed):
+    # Підключення до бази даних
+    conn = sqlite3.connect('your_database.db')
+    cursor = conn.cursor()
+
+    # Виконання SQL запиту для отримання зображення за породою собаки
+    cursor.execute("SELECT image_path FROM dog_images WHERE breed = ?", (breed,))
+    result = cursor.fetchone()
+
+    # Закриття підключення до бази даних
+    cursor.close()
+    conn.close()
+
+    if result:
+        image_path = result[0]
+        image = Image.open(image_path)
+        st.image(image, caption=f"Зображення породи {breed}")
+    else:
+        st.write("Зображення для цієї породи собаки не знайдено.")
+    
 model = load_model("dog_breeds.h5")
-st.title('Класифікація зображень')
 
+st.title('Класифікація зображень')
 img = load_image()
 result = st.button('Розпізнати зображення')
 if result:
     x = preprocess_image(img)
     preds = model.predict(x)
     st.write('**Результати розпізнавання:**')
-    top_indexes = print_predictions(preds)
-    top_breed_index = top_indexes[0]
-    top_breed = dog_breeds[top_breed_index]
-    display_predicted_breed(img, top_breed)
+    #top_indexes = print_predictions(preds)
+    #top_breed_index = top_indexes[0]
+    #top_breed = dog_breeds[top_breed_index]
+    #display_predicted_breed(img, top_breed)
+    #st.write(preds)
+    #st.write(type(preds))
+    print_predictions(preds)

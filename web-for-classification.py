@@ -66,6 +66,7 @@ def print_predictions(preds, top_k=3):
     for i, index in enumerate(top_indexes):
         breed = dog_breeds[index]
         probability = preds2[index]
+        st.write('Належить до породи: ' + dog_breeds[res]) 
         st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
     return top_indexes
     

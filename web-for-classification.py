@@ -109,7 +109,7 @@ def print_predictions(preds, top_k=3):
         probability = preds2[index]
         st.write('{}. {} (Ймовірність: {:.2%})'.format(i, breed, probability))
         breed_image_path = get_image_url_by_breed(breed)
-        breed_image = Image.open(breed_image_path).convert('RGB')
+        breed_image = Image.open(breed_image_path)
         st.image(breed_image, caption=breed, width=200)
 
 model = load_model("dog_breeds.h5")

@@ -47,16 +47,16 @@ def load_image():
     else:
         return None
 
-#def print_predictions(preds, top_k=3):
-    #preds2 = preds.copy()
-    #st.write(preds2)
-    #preds2.sort()
-    #preds2 = np.flip(preds2)
-    ## st.write(preds2)
-    #res = np.where(preds[0] == preds2[0][0])[0][0]
-    ##st.write('Належить до породи: ' + str(res))
+def print_predictions(preds):
+    preds2 = preds.copy()
+    st.write(preds2)
+    preds2.sort()
+    preds2 = np.flip(preds2)
+    st.write(preds2)
+    res = np.where(preds[0] == preds2[0][0])[0][0]
+    st.write('Належить до породи: ' + str(res))
     #st.write('Належить до породи: ' + dog_breeds[res])    
-    #return res
+    return res
 
 def print_predictions(preds, top_k=3):
     preds2 = preds.copy()
